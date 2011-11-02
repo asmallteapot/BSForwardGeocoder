@@ -89,7 +89,7 @@
 				break;
 				
 			case G_GEO_UNKNOWN_ADDRESS:
-				message = [NSString stringWithFormat:@"Could not find %@", forwardGeocoder.searchQuery];
+				message = [NSString stringWithFormat:@"Could not find %@", forwardGeocoder.query];
 				break;
 				
 			case G_GEO_TOO_MANY_QUERIES:

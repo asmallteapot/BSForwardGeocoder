@@ -10,7 +10,6 @@
 
 
 #import <Foundation/Foundation.h>
-#import "BSGoogleV2KmlParser.h"
 #import "BSGoogleV3KmlParser.h"
 
 // Enum for geocoding status responses
@@ -29,27 +28,23 @@ enum {
 @class BSForwardGeocoder;
 
 @protocol BSForwardGeocoderDelegate<NSObject>
-@required
-- (void)forwardGeocoderFoundLocation:(BSForwardGeocoder*)geocoder;
+- (void)forwardGeocoderFoundLocation:(BSForwardGeocoder *)geocoder;
 @optional
-- (void)forwardGeocoderError:(BSForwardGeocoder*)geocoder errorMessage:(NSString *)errorMessage;
+- (void)forwardGeocoderError:(BSForwardGeocoder *)geocoder errorMessage:(NSString *)message;
 @end
 
 @interface BSForwardGeocoder : NSObject {
-	NSString *searchQuery;
-	NSString *googleAPiKey;
-	int status;
-	NSArray *results;
-	BOOL useHTTP;
 	id<BSForwardGeocoderDelegate> delegate;
+	NSString *query;
+	NSArray *results;
+	int status;
 }
+
 - (id)initWithDelegate:(id<BSForwardGeocoderDelegate>)aDelegate;
 - (void)findLocation:(NSString *)searchString;
 
 @property (assign) id<BSForwardGeocoderDelegate> delegate;
-@property (nonatomic, retain) NSString *searchQuery;
-@property (nonatomic, readonly) int status;
+@property (nonatomic, retain) NSString *query;
 @property (nonatomic, retain) NSArray *results;
-@property (nonatomic, assign) BOOL useHTTP;
-
+@property (nonatomic, readonly) int status;
 @end
